@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class WeatherDataServiceImpl implements WeatherDataService {
 
-    //    添加日志处理
+    //添加日志处理
     private static Logger logger = LoggerFactory.getLogger(WeatherDataServiceImpl.class);
 
     private static final String WEATHER_URI = "http://wthrcdn.etouch.cn/weather_mini?";
@@ -79,5 +79,34 @@ public class WeatherDataServiceImpl implements WeatherDataService {
         }
 
         return resp;
+    }
+
+    @Override
+    public void syncDateByCityId(String cityId) {
+        String uri = WEATHER_URI + "citykey=" + cityId;
+        saveWeatherData(uri);
+    }
+
+    private void saveWeatherData(String uri){
+        String key = uri;
+        String strBody = null;
+        ValueOperations<String, String> ops =  stringRedisTemplate.opsForValue();
+
+        //使用jackson进行解析
+        ObjectMapper mapper = new ObjectMapper();
+        WeatherResponse resp = new WeatherResponse();
+
+//       查询缓存，如果缓存中存在，则调缓存
+
+        //调用接口
+        //使用HttpClient工具获取 ==> String对象
+        ResponseEntity<String> respStr = restTemplate.getForEntity(uri, String.class);
+        //提取对象的body ==> String
+        if(respStr.getStatusCodeValue() == 200){
+            strBody = respStr.getBody();
+        }
+            //存入缓存
+        ops.set(key, strBody, TIME_OUT, TimeUnit.SECONDS);
+
     }
 }

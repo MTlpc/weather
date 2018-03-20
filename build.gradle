@@ -30,5 +30,10 @@ dependencies {
 	compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.3'
 //	Redis依赖
 	compile('org.springframework.boot:spring-boot-starter-data-redis')
+//	Quartz依赖
+	compile('org.springframework.boot:spring-boot-starter-quartz')
+//	Thymeleaf依赖
+	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
