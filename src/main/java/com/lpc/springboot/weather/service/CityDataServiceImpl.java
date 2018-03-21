@@ -3,6 +3,7 @@ package com.lpc.springboot.weather.service;
 import com.lpc.springboot.weather.util.XmlBuilder;
 import com.lpc.springboot.weather.vo.City;
 import com.lpc.springboot.weather.vo.CityList;
+import com.lpc.springboot.weather.vo.ProvinceList;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
@@ -15,9 +16,9 @@ import java.util.List;
 public class CityDataServiceImpl implements CityDataService{
 
     @Override
-    public List<City> listCity() throws Exception {
+    public List<CityList> listCity() throws Exception {
 //        读取XML
-        Resource resource = new ClassPathResource("citylist.xml");
+        Resource resource = new ClassPathResource("citilist.xml");
 
 //        加入一个输入流
         BufferedReader br = new BufferedReader(new InputStreamReader(resource.getInputStream(), "utf-8"));
@@ -31,9 +32,9 @@ public class CityDataServiceImpl implements CityDataService{
 
         br.close();
 //         将XML转换成java对象
-        CityList cityList = (CityList) XmlBuilder.xmlStrToObject(CityList.class, buffer.toString());
+        ProvinceList provinceList = (ProvinceList) XmlBuilder.xmlStrToObject(ProvinceList.class, buffer.toString());
 
-        return cityList.getCityList();
+        return provinceList.getProvinces();
     }
 
 }

@@ -11,10 +11,12 @@
         <div class="row">
             <h3 th:text="${reportModel.title}">lpc</h3>
             <select class="custom-select w-25" id="selectCityId">
-                <option th:each="city : ${reportModel.cityList}"
-                        th:value="${city.id}" th:text="${city.name}"
-                        th:selected="${city.id eq reportModel.cityId}">
-                </option>
+                <optgroup th:each="cityList : ${reportModel.cityList}" th:label="${cityList.getProvince()}">
+                    <option th:each="city : ${cityList.getCityList()}"
+                            th:value="${city.id}" th:text="${city.name}"
+                            th:selected="${city.id eq reportModel.cityId}">
+                    </option>
+                </optgroup>
             </select>
         </div>
 

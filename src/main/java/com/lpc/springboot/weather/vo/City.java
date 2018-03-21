@@ -1,21 +1,14 @@
 package com.lpc.springboot.weather.vo;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 
-@XmlRootElement(name="d")
+@XmlRootElement(name="市")
 @XmlAccessorType(XmlAccessType.FIELD)   //通过字段来访问
 public class City {
-    @XmlAttribute(name="d1")
+    @XmlElement(name="编码")
     private String id;
-    @XmlAttribute(name="d2")
+    @XmlElement(name="市名")
     private String name;
-    @XmlAttribute(name="d3")
-    private String code;
-    @XmlAttribute(name="d4")
-    private String province;
 
     public String getId() {
         return id;
@@ -31,21 +24,5 @@ public class City {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getProvince() {
-        return province;
-    }
-
-    public void setProvince(String province) {
-        this.province = province;
     }
 }
