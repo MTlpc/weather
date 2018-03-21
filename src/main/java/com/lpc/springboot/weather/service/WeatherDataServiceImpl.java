@@ -87,6 +87,10 @@ public class WeatherDataServiceImpl implements WeatherDataService {
         saveWeatherData(uri);
     }
 
+    /**
+     * 将uri解析之后存入到Redis中
+     * @param uri 待解析的URI
+     */
     private void saveWeatherData(String uri){
         String key = uri;
         String strBody = null;
